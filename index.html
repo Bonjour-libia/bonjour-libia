@@ -158,23 +158,19 @@ footer a{font-weight:700}
         <li>La dirección exacta se comparte solo con quienes se inscriben.</li>
         <li>Tus datos solo se usan para invitarte a los planes.</li>
       </ul>
-      <p style="margin-top:22px"><a class="btn ghost" id="groupBtn" href="#" target="_blank" rel="noopener" style="color:var(--ink)">Entrar al grupo de WhatsApp</a></p>
-    </div>
-    <form id="joinForm" autocomplete="on">
+      <p style="margin-top:22px"><a class="btn ghost" id="groupBtn" href="#" target="_blank" rel="noopener" style="color:var(--ink)"></div>
+    <form id="joinForm" action="https://formspree.io/f/maeodeez" method="POST" autocomplete="on">
       <label for="nombre">Tu nombre</label>
-      <input id="nombre" type="text" required placeholder="Ej. María">
-      <label for="zona">¿Dónde vives?</label>
-      <select id="zona" required>
-        <option value="">Elige una opción</option>
-        <option>Rive-Sud</option><option>Montréal</option><option>Québec</option><option>Otra zona</option>
-      </select>
-      <label for="plan">¿A qué plan te apuntas?</label>
-      <select id="plan" required>
-        <option value="">Elige una opción</option>
-        <option>Café para conocernos</option><option>Muévete (baile o ejercicio)</option><option>Caminata</option><option>Talleres (pintura, IA y más)</option><option>Cena</option><option>Lo que se arme</option>
-      </select>
+      <input id="nombre" name="nombre" type="text" required placeholder="Ej. María">
+
+      <label for="contacto">Tu Instagram o WhatsApp</label>
+      <input id="contacto" name="contacto" type="text" required placeholder="Ej. @tuinstagram o +1 514...">
+
+      <label for="interes">¿Qué plan o clase te interesa?</label>
+      <input id="interes" name="interes" type="text" required placeholder="Ej. Cafecito, clases, talleres, lo que se arme...">
+
       <button class="btn" type="submit" id="joinBtn">Quiero unirme</button>
-      <p class="note">Se abrirá WhatsApp con tu mensaje listo para enviarme.</p>
+      <p class="note" id="formStatus">Recibiré tus datos y te escribo pronto para sumarte.</p>
     </form>
   </div>
 </section>
