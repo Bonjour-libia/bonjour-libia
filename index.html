@@ -30,7 +30,7 @@ a{color:var(--link)}
 .btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
 
 /* hero */
-.hero{background:var(--hero);color:var(--hero-ink);padding:56px 0 64px;position:relative;overflow:hidden}
+.hero{background:var(--hero);color:var(--hero-ink);padding:64px 0 64px;position:relative;overflow:hidden}
 .hero .wrap{display:grid;gap:40px;align-items:center}
 .hero h1{font-size:clamp(52px,13vw,112px);font-weight:800;letter-spacing:-.03em}
 .script{font-family:Allura,"Brush Script MT",cursive;font-size:clamp(30px,6vw,44px);color:var(--sun);margin:10px 0 18px}
@@ -45,15 +45,21 @@ a{color:var(--link)}
 .clock b{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(34px,8vw,48px);font-weight:800;letter-spacing:-.02em}
 .gap{margin:6px 0 0;font-size:15px;opacity:.9}
 
-.lang{position:absolute;top:14px;right:18px;display:flex;gap:6px;z-index:2}
+.lang{position:absolute;top:14px;right:18px;display:flex;gap:6px;z-index:10}
 .lang button{font:inherit;font-size:14px;font-weight:700;padding:6px 14px;border-radius:99px;border:2px solid #fff;background:transparent;color:#fff;cursor:pointer}
 .lang button[aria-pressed="true"]{background:#fff;color:#2A1070}
 .lang button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 
-/* ilustraciones decorativas */
-.doodle-banner{display:flex;align-items:center;gap:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:14px 18px;margin-top:22px;max-width:60ch}
-.doodle-banner p{margin:0;font-size:15.5px;color:var(--muted)}
-.plan-icon{width:46px;height:46px;border-radius:14px;background:var(--lav);display:grid;place-items:center;margin-bottom:14px}
+/* ilustraciones estilo chibi */
+.chibi-feature{display:flex;flex-wrap:wrap;align-items:center;gap:20px;background:var(--surface);border:1.5px solid var(--line);border-radius:24px;padding:18px 22px;margin-top:24px}
+.chibi-feature p{margin:0;color:var(--muted);max-width:44ch;font-size:16px}
+.chibi-feature strong{color:var(--ink)}
+
+.doodle-grid{display:grid;gap:16px;margin-top:16px}
+.doodle-card{display:flex;align-items:center;gap:16px;background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px}
+.doodle-card p{margin:0;font-size:15.5px;color:var(--muted)}
+.doodle-card strong{color:var(--ink)}
+.plan-icon{width:48px;height:48px;border-radius:16px;background:var(--lav);display:grid;place-items:center;margin-bottom:14px}
 
 /* secciones */
 section{padding:64px 0}
@@ -90,6 +96,7 @@ footer a{font-weight:700}
 
 @media (min-width:820px){
   .hero .wrap{grid-template-columns:1.15fr .85fr}
+  .doodle-grid{grid-template-columns:1fr 1fr}
   .row{grid-template-columns:.8fr 1.2fr;gap:30px;align-items:baseline}
   .plans{grid-template-columns:repeat(3,1fr)}
   .join .wrap{grid-template-columns:1fr 1fr;align-items:start}
@@ -100,9 +107,10 @@ footer a{font-weight:700}
 <body>
 
 <header class="hero">
-  <div class="lang" role="group" aria-label="Idioma / Langue">
+  <div class="lang" role="group" aria-label="Idioma / Langue / Language">
     <button type="button" data-lang="es" aria-pressed="true">ES</button>
     <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
   </div>
   <div class="wrap">
     <div>
@@ -114,9 +122,9 @@ footer a{font-weight:700}
       </div>
     </div>
     <div class="clocks" aria-label="Hora actual en Montréal y en Ciudad de México">
-      <div class="clock"><span>Montréal</span><b id="tMtl">--:--</b></div>
-      <div class="clock"><span>Ciudad de México</span><b id="tMex">--:--</b></div>
-      <p class="gap" id="gapTxt">Solo una hora de diferencia. Y se siente a un mundo.</p>
+      <div class="clock"><span id="lblMtl">Montréal</span><b id="tMtl">--:--</b></div>
+      <div class="clock"><span id="lblMex">Ciudad de México</span><b id="tMex">--:--</b></div>
+      <p class="gap" id="gapTxt">Calculando diferencia horaria...</p>
     </div>
   </div>
 </header>
@@ -128,16 +136,68 @@ footer a{font-weight:700}
     <p>Aprendí que vivir lejos de casa se siente en lo de todos los días: el café de media tarde, la plática de un martes. Por eso armo este espacio: para conocer gente de distintos países e idiomas, descubrir lugares y juntarnos.</p>
     <p>Aquí no tienes que ser perfecto. Solo ven a platicar.</p>
 
-    <!-- Dibujo: cafecito + hoja de maple + sol -->
-    <div class="doodle-banner" aria-hidden="true">
-      <svg width="64" height="48" viewBox="0 0 64 48" fill="none">
-        <circle cx="52" cy="13" r="8" fill="#FFCB5C"/>
-        <path d="M10 22h24v11a9 9 0 0 1-9 9h-6a9 9 0 0 1-9-9V22z" fill="#4B21B5"/>
-        <path d="M34 25h3.5a4.5 4.5 0 0 1 0 9H34" stroke="#4B21B5" stroke-width="3" stroke-linecap="round"/>
-        <path d="M16 16c0-3 3-3 3-6M24 16c0-3 3-3 3-6" stroke="#2D5BEA" stroke-width="2.4" stroke-linecap="round"/>
-        <path d="M45 35l3-6 2 3 3-4 2 5-4 2 1 4-3-2-3 2 1-4z" fill="#7FD8BE"/>
+    <!-- Personaje estilo chibi pensativo con lentes y sudadera amarilla -->
+    <div class="chibi-feature">
+      <svg width="96" height="86" viewBox="0 0 110 96" fill="none" aria-hidden="true" style="flex-shrink:0">
+        <!-- Nube de pensamiento -->
+        <circle cx="88" cy="24" r="11" fill="#F7F4FF" stroke="#DDD3F5" stroke-width="2"/>
+        <circle cx="77" cy="36" r="3.5" fill="#F7F4FF" stroke="#DDD3F5" stroke-width="1.6"/>
+        <circle cx="72" cy="42" r="2" fill="#F7F4FF" stroke="#DDD3F5" stroke-width="1.4"/>
+        <text x="84.5" y="29" fill="#2D5BEA" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="14">?</text>
+
+        <!-- Chongo -->
+        <circle cx="42" cy="18" r="13" fill="#6E4730"/>
+        <!-- Cabeza -->
+        <circle cx="44" cy="44" r="23" fill="#F6C6A8"/>
+        <!-- Cabello castaño -->
+        <path d="M21 42c1-16 14-24 26-23 11 1 18 9 19 21-6-5-13-7-21-7-9 0-16 4-24 9z" fill="#6E4730"/>
+        <!-- Mejillas -->
+        <ellipse cx="29" cy="50" rx="4.5" ry="2.6" fill="#F29CB0" fill-opacity=".65"/>
+        <ellipse cx="59" cy="50" rx="4.5" ry="2.6" fill="#F29CB0" fill-opacity=".65"/>
+        <!-- Ojos grandes -->
+        <circle cx="35" cy="45" r="5.2" fill="#1B1238"/>
+        <circle cx="54" cy="45" r="5.2" fill="#1B1238"/>
+        <circle cx="33.3" cy="43.2" r="1.9" fill="#FFFFFF"/>
+        <circle cx="52.3" cy="43.2" r="1.9" fill="#FFFFFF"/>
+        <!-- Lentes negros -->
+        <rect x="26.5" y="38.5" width="17" height="13" rx="5" stroke="#1B1238" stroke-width="2.6" fill="none"/>
+        <rect x="45.5" y="38.5" width="17" height="13" rx="5" stroke="#1B1238" stroke-width="2.6" fill="none"/>
+        <path d="M43.5 44.5h2" stroke="#1B1238" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- Boca pensativa -->
+        <path d="M41 56h5" stroke="#8C4A3E" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- Sudadera amarilla -->
+        <path d="M21 88c1-14 10-21 23-21s22 7 23 21H21z" fill="#FFCB5C" stroke="#1B1238" stroke-width="2"/>
+        <!-- Mano en barbilla -->
+        <path d="M48 76l2-15" stroke="#F6C6A8" stroke-width="6.5" stroke-linecap="round"/>
       </svg>
-      <p><strong>Entre café y maple:</strong> planes reales para hacer amistad sin prisas, ya sea que lleves poco o mucho en Québec.</p>
+      <p><strong id="chibiTitle">¿Todavía no sabes a qué plan apuntarte?</strong> <span id="chibiTxt">No te preocupes: escríbenos y vamos armando café, gym o talleres poco a poco.</span></p>
+    </div>
+
+    <div class="doodle-grid">
+      <!-- Cafecito -->
+      <div class="doodle-card">
+        <svg width="64" height="54" viewBox="0 0 64 54" fill="none" aria-hidden="true" style="flex-shrink:0">
+          <path d="M18 14c0-4 4-4 4-8M30 14c0-4 4-4 4-8" stroke="#2D5BEA" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M12 20h28v13a11 11 0 0 1-11 11h-6a11 11 0 0 1-11-11V20z" fill="#4B21B5"/>
+          <path d="M40 24h4a5 5 0 0 1 0 10h-4" stroke="#4B21B5" stroke-width="3.2" stroke-linecap="round"/>
+          <ellipse cx="26" cy="47" rx="18" ry="3.5" fill="#FFCB5C"/>
+        </svg>
+        <p><strong id="doodleCafeTitle">Cafecito sin prisa:</strong> <span id="doodleCafeTxt">pláticas reales, risas y buena vibra entre amigas.</span></p>
+      </div>
+
+      <!-- Chicas haciendo gym -->
+      <div class="doodle-card">
+        <svg width="72" height="54" viewBox="0 0 72 54" fill="none" aria-hidden="true" style="flex-shrink:0">
+          <circle cx="20" cy="13" r="5.5" fill="#F2C9D0" stroke="#1B1238" stroke-width="1.8"/>
+          <path d="M15 11c1-4 8-4 10 0" fill="#4B21B5"/>
+          <path d="M20 19v13M13 24l7-3 7 3M20 32l-6 12M20 32l6 12" stroke="#1B1238" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 22v5M29 22v5" stroke="#2D5BEA" stroke-width="2.8" stroke-linecap="round"/>
+          <circle cx="48" cy="14" r="5.5" fill="#FFCB5C" stroke="#1B1238" stroke-width="1.8"/>
+          <path d="M48 19v13M42 23l6 2 6-2M48 32l-5 12M48 32l6 12" stroke="#1B1238" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="60" cy="21" r="4" fill="#7FD8BE"/>
+        </svg>
+        <p><strong id="doodleGymTitle">Gym y movimiento:</strong> <span id="doodleGymTxt">clases, entrenos y energía en grupo para activarnos juntas.</span></p>
+      </div>
     </div>
   </div>
 </section>
@@ -176,12 +236,12 @@ footer a{font-weight:700}
       <div class="plan">
         <div class="plan-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="7" stroke="#2D5BEA" stroke-width="2.4"/>
-            <path d="M9.5 12.5l2 2 3.5-4.5" stroke="#4B21B5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 10v4M7 8v8M17 8v8M20 10v4" stroke="#2D5BEA" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M7 12h10" stroke="#4B21B5" stroke-width="2.6" stroke-linecap="round"/>
           </svg>
         </div>
         <h3>Muévete</h3>
-        <p>Una clase o actividad para mover el cuerpo juntos: salsa, zumba, caminata o lo que la comunidad pida.</p>
+        <p>Una clase o actividad para mover el cuerpo juntos: gym, baile, caminata o lo que la comunidad pida.</p>
         <span class="state">Por definir</span>
       </div>
 
@@ -210,16 +270,6 @@ footer a{font-weight:700}
         <li>La dirección exacta se comparte solo con quienes se inscriben.</li>
         <li>Tus datos solo se usan para invitarte a los planes.</li>
       </ul>
-
-      <!-- Dibujo de bienvenida y comunidad -->
-      <div class="doodle-banner" aria-hidden="true" style="margin-top:24px">
-        <svg width="56" height="44" viewBox="0 0 56 44" fill="none">
-          <circle cx="18" cy="22" r="10" fill="#F2C9D0"/>
-          <circle cx="34" cy="22" r="10" fill="#FFCB5C" fill-opacity=".85"/>
-          <path d="M12 36c2-4 10-4 12 0M28 36c2-4 10-4 12 0" stroke="#1B1238" stroke-width="2.2" stroke-linecap="round"/>
-        </svg>
-        <p><strong>Primero nos conocemos:</strong> reviso tu solicitud con calma para armar grupos bonitos y seguros.</p>
-      </div>
     </div>
 
     <form id="joinForm" action="https://formspree.io/f/maeodeez" method="POST" autocomplete="on">
@@ -230,7 +280,7 @@ footer a{font-weight:700}
       <input id="contacto" name="contacto" type="text" required placeholder="Ej. @tuinstagram o +1 514...">
 
       <label for="interes">¿Qué plan o clase te interesa?</label>
-      <input id="interes" name="interes" type="text" required placeholder="Ej. Cafecito, clases, talleres, lo que se arme...">
+      <input id="interes" name="interes" type="text" required placeholder="Ej. Cafecito, gym, clases, talleres...">
 
       <button class="btn" type="submit" id="joinBtn">Quiero unirme</button>
       <p class="note" id="formStatus">Recibiré tus datos y te escribo pronto para sumarte.</p>
@@ -250,146 +300,235 @@ var CONFIG = {
   INSTAGRAM: "https://www.instagram.com/libiaenmontreal"
 };
 
-function wire(id, url){
-  var el = document.getElementById(id);
-  if(!el) return;
-  if(url){ el.href = url; } else { el.setAttribute("aria-disabled","true"); el.removeAttribute("href"); }
-}
-wire("igLink", CONFIG.INSTAGRAM);
+(function(){
+  var ig = document.getElementById("igLink");
+  if(ig && CONFIG.INSTAGRAM){ ig.href = CONFIG.INSTAGRAM; }
+})();
 
-/* idioma ES / FR */
-var LANG = "es";
-var FR = {
-  "Descubre. Vive. Conecta.":"Découvre. Vis. Connecte.",
-  "Tu comadre en Canadá. Conozco gente, lugares y planes en Québec, y te invito a platicar con calma.":"Ta comadre au Canada, comme on dit au Mexique pour une amie proche. Je rencontre des gens, je découvre des lieux et des plans au Québec, et je t’invite à jaser sans se presser.",
-  "Únete a Bonjour Club":"Rejoins Bonjour Club",
-  "Ciudad de México":"Mexico",
-  "Una mesa para conocernos":"Une table pour faire connaissance",
-  "Soy Libia. Vengo de México, vivo en Québec y trabajo de 9 a 5, como mucha gente aquí.":"Moi, c’est Libia. Je viens du Mexique, je vis au Québec et je travaille de 9 à 5, comme beaucoup de gens ici.",
-  "Aprendí que vivir lejos de casa se siente en lo de todos los días: el café de media tarde, la plática de un martes. Por eso armo este espacio: para conocer gente de distintos países e idiomas, descubrir lugares y juntarnos.":"J’ai appris que vivre loin de chez soi se sent dans le quotidien : le café de l’après-midi, la jasette d’un mardi. C’est pour ça que je crée cet espace : pour rencontrer des gens de pays et de langues différents, découvrir des lieux et se réunir.",
-  "Aquí no tienes que ser perfecto. Solo ven a platicar.":"Ici, pas besoin d’être parfait. Viens simplement jaser.",
-  "Qué encuentras aquí":"Ce que tu trouves ici",
-  "Cuatro cosas que hago en mi cuenta y en la comunidad.":"Quatre choses que je fais sur mon compte et dans la communauté.",
-  "Bonjour Libia conoce a…":"Bonjour Libia rencontre…",
-  "Bonjour Libia va a…":"Bonjour Libia va à…",
-  "Bonjour Libia aprendió…":"Bonjour Libia a appris…",
-  "Entrevistas cortas a personas con historia: coaches, estilistas, ingenieros, dueños de negocios. Terminan con lo que aprendí.":"De courtes entrevues avec des gens inspirants : coachs, coiffeuses, ingénieurs, propriétaires d’entreprise. Elles se terminent par ce que j’ai appris.",
-  "Cafés, rincones y planes de fin de semana en la Rive-Sud y Montréal, con datos útiles de qué pedir y cuánto cuesta.":"Cafés, petits coins et plans de fin de semaine sur la Rive-Sud et à Montréal, avec des infos utiles : quoi commander et combien ça coûte.",
-  "Pláticas de diez segundos sobre vivir entre dos países, desde el carro o desde mi casa.":"De courtes jasettes de dix secondes sur la vie entre deux pays, depuis ma voiture ou ma maison.",
-  "La comunidad: gente que se une para café, baile, caminatas, talleres y cenas.":"La communauté : des gens qui se réunissent pour un café, de la danse, des marches, des ateliers et des soupers.",
-  "Planes que estamos armando":"Les plans qu’on prépare",
-  "Las fechas se confirman cuando se junte el grupo. Apúntate y te aviso primero.":"Les dates seront confirmées quand le groupe sera formé. Inscris-toi et je te préviens en premier.",
-  "Café para conocernos":"Café pour faire connaissance",
-  "Un primer encuentro en un lugar público, con un grupo pequeño.":"Une première rencontre dans un lieu public, en petit groupe.",
-  "Fecha por confirmar":"Date à confirmer",
-  "Muévete":"Bouge-toi",
-  "Una clase o actividad para mover el cuerpo juntos: salsa, zumba, caminata o lo que la comunidad pida.":"Un cours ou une activité pour bouger ensemble : salsa, zumba, marche ou ce que la communauté demandera.",
-  "Por definir":"À définir",
-  "Talleres":"Ateliers",
-  "Aprender algo nuevo con personas de la comunidad: pintura, inteligencia artificial y más.":"Apprendre quelque chose de nouveau avec des gens de la communauté : peinture, intelligence artificielle et plus.",
-  "Es gratis. Cuéntame quién eres y te escribo cuando haya un plan o clase que encaje contigo.":"C’est gratuit. Dis-moi qui tu es et je t’écris quand il y aura un plan ou un cours qui te convient.",
-  "Los encuentros son en lugares públicos y en grupo.":"Les rencontres ont lieu dans des lieux publics et en groupe.",
-  "La dirección exacta se comparte solo con quienes se inscriben.":"L’adresse exacte est partagée seulement avec les personnes inscrites.",
-  "Tus datos solo se usan para invitarte a los planes.":"Tes données servent seulement à t’inviter aux plans.",
-  "Tu nombre":"Ton prénom",
-  "Tu Instagram o WhatsApp":"Ton Instagram ou WhatsApp",
-  "¿Qué plan o clase te interesa?":"Quel plan ou cours t’intéresse ?",
-  "Quiero unirme":"Je veux me joindre",
-  "Recibiré tus datos y te escribo pronto para sumarte.":"Je recevrai tes infos et je t’écris bientôt pour t’ajouter."
-};
-
-var orig = new Map();
-function setLang(l){
-  LANG = l;
-  var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), list = [], n;
-  while((n = w.nextNode())) list.push(n);
-  list.forEach(function(t){
-    var p = t.parentNode;
-    if(!p || p.tagName === "SCRIPT" || p.tagName === "SVG" || p.closest("svg") || p.id === "gapTxt") return;
-    if(!orig.has(t)){
-      var key = t.nodeValue.trim();
-      if(!key || !FR.hasOwnProperty(key)) return;
-      orig.set(t, t.nodeValue);
-    }
-    var src = orig.get(t), k = src.trim();
-    t.nodeValue = l === "fr" ? src.replace(k, FR[k]) : src;
-  });
-  document.getElementById("nombre").placeholder = l === "fr" ? "Ex. Marie" : "Ej. María";
-  document.getElementById("contacto").placeholder = l === "fr" ? "Ex. @toninstagram ou +1 514..." : "Ej. @tuinstagram o +1 514...";
-  document.getElementById("interes").placeholder = l === "fr" ? "Ex. Café, cours, ateliers..." : "Ej. Cafecito, clases, talleres, lo que se arme...";
-  document.documentElement.lang = l;
-  document.title = l === "fr" ? "Bonjour Libia · Ta comadre au Canada" : "Bonjour Libia · Tu comadre en Canadá";
-  document.querySelectorAll(".lang button").forEach(function(b){
-    b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l ? "true" : "false");
-  });
-  try{ localStorage.setItem("bl_lang", l); }catch(e){}
-  tick();
-}
-
-document.querySelectorAll(".lang button").forEach(function(b){
-  b.addEventListener("click", function(){ setLang(b.getAttribute("data-lang")); });
-});
-
-/* relojes en vivo */
-function parts(tz){
+/* relojes en vivo Montréal y Ciudad de México */
+function getClockParts(timeZone, use24h){
   var now = new Date();
-  var f = new Intl.DateTimeFormat("en-US",{timeZone:tz,hour:"numeric",minute:"2-digit",hour12:true});
-  var p = f.formatToParts(now), o = {};
-  p.forEach(function(x){ o[x.type] = x.value; });
-  var h24 = new Intl.DateTimeFormat("en-US",{timeZone:tz,hour:"numeric",hour12:false}).formatToParts(now).filter(function(x){return x.type==="hour";})[0].value;
-  return { text: o.hour + ":" + o.minute + " " + (o.dayPeriod||"").toLowerCase(), h: parseInt(h24,10) % 24 };
+  var fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: timeZone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: !use24h
+  });
+  var parts = fmt.formatToParts(now);
+  var h = "00", m = "00", dp = "";
+  for(var i = 0; i < parts.length; i++){
+    if(parts[i].type === "hour") h = parts[i].value;
+    if(parts[i].type === "minute") m = parts[i].value;
+    if(parts[i].type === "dayPeriod") dp = parts[i].value.toLowerCase();
+  }
+  var hourNum = parseInt(h, 10);
+  if(isNaN(hourNum)) hourNum = now.getUTCHours();
+  return {
+    label: dp ? (h + ":" + m + " " + dp) : (h + ":" + m),
+    hour24: hourNum
+  };
 }
-function tick(){
+
+var LANG = "es";
+
+function updateClocks(){
   try{
-    var a = parts("America/Toronto"), b = parts("America/Mexico_City");
-    document.getElementById("tMtl").textContent = a.text;
-    document.getElementById("tMex").textContent = b.text;
-    var d = (a.h - b.h + 24) % 24;
-    var t = d === 1 ? (LANG === "fr" ? "Une heure de différence seulement." : "Solo una hora de diferencia.") : (LANG === "fr" ? d + " heures de différence seulement." : "Solo " + d + " horas de diferencia.");
-    document.getElementById("gapTxt").textContent = t + (LANG === "fr" ? " Et pourtant, ça paraît si loin." : " Y se siente a un mundo.");
+    var mtl = getClockParts("America/Toronto", false);
+    var mex = getClockParts("America/Mexico_City", false);
+    var mtl24 = getClockParts("America/Toronto", true).hour24;
+    var mex24 = getClockParts("America/Mexico_City", true).hour24;
+
+    var elMtl = document.getElementById("tMtl");
+    var elMex = document.getElementById("tMex");
+    var elGap = document.getElementById("gapTxt");
+
+    if(elMtl) elMtl.textContent = mtl.label;
+    if(elMex) elMex.textContent = mex.label;
+
+    if(elGap){
+      var diff = (mtl24 - mex24 + 24) % 24;
+      if(LANG === "fr"){
+        elGap.textContent = (diff === 1 ? "Une heure de différence seulement." : diff + " heures de différence seulement.") + " Et pourtant, ça paraît si loin.";
+      } else if(LANG === "en"){
+        elGap.textContent = (diff === 1 ? "Just one hour apart." : "Just " + diff + " hours apart.") + " Yet it feels worlds away.";
+      } else {
+        elGap.textContent = (diff === 1 ? "Solo una hora de diferencia." : "Solo " + diff + " horas de diferencia.") + " Y se siente a un mundo.";
+      }
+    }
   }catch(e){}
 }
-var saved = null;
-try{ saved = localStorage.getItem("bl_lang"); }catch(e){}
-var start = saved || ((navigator.language || "").toLowerCase().indexOf("fr") === 0 ? "fr" : "es");
-if(start === "fr"){ setLang("fr"); } else { tick(); }
-setInterval(tick, 30000);
+
+var I18N = {
+  fr: {
+    title: "Bonjour Libia · Ta comadre au Canada",
+    script: "Découvre. Vis. Connecte.",
+    lead: "Ta comadre au Canada. Je rencontre des gens, je découvre des lieux et des plans au Québec, et je t’invite à jaser sans se presser.",
+    cta: "Rejoins Bonjour Club",
+    lblMtl: "Montréal",
+    lblMex: "Mexico",
+    chibiTitle: "Tu ne sais pas encore quel plan choisir ?",
+    chibiTxt: "Pas de souci : écris-nous et on prépare café, gym ou ateliers tranquillement.",
+    doodleCafeTitle: "Petit café tranquille :",
+    doodleCafeTxt: "de vraies discussions, des rires et une belle énergie entre amies.",
+    doodleGymTitle: "Gym et mouvement :",
+    doodleGymTxt: "cours, entraînements et motivation en groupe pour bouger ensemble.",
+    nombrePh: "Ex. Marie",
+    contactoPh: "Ex. @toninstagram ou +1 514...",
+    interesPh: "Ex. Café, gym, cours, ateliers...",
+    btn: "Je veux me joindre",
+    note: "Je recevrai tes infos et je t’écris bientôt pour t’ajouter."
+  },
+  en: {
+    title: "Bonjour Libia · Your comadre in Canada",
+    script: "Discover. Live. Connect.",
+    lead: "Your comadre in Canada. I meet people, discover spots and plans in Québec, and invite you to chat at your own pace.",
+    cta: "Join Bonjour Club",
+    lblMtl: "Montréal",
+    lblMex: "Mexico City",
+    chibiTitle: "Not sure which plan fits you yet?",
+    chibiTxt: "No worries: send a note and we’ll shape coffee, gym, or workshops step by step.",
+    doodleCafeTitle: "Unrushed coffee:",
+    doodleCafeTxt: "real chats, laughs, and warm energy among friends.",
+    doodleGymTitle: "Gym & movement:",
+    doodleGymTxt: "classes, workouts, and group energy to get moving together.",
+    nombrePh: "Ex. Maria",
+    contactoPh: "Ex. @yourinstagram or +1 514...",
+    interesPh: "Ex. Coffee, gym, classes, workshops...",
+    btn: "I want to join",
+    note: "I’ll get your details and message you soon to add you in."
+  }
+};
+
+var ES_DEFAULTS = {
+  title: "Bonjour Libia · Tu comadre en Canadá",
+  script: "Descubre. Vive. Conecta.",
+  lead: "Tu comadre en Canadá. Conozco gente, lugares y planes en Québec, y te invito a platicar con calma.",
+  cta: "Únete a Bonjour Club",
+  lblMtl: "Montréal",
+  lblMex: "Ciudad de México",
+  chibiTitle: "¿Todavía no sabes a qué plan apuntarte?",
+  chibiTxt: "No te preocupes: escríbenos y vamos armando café, gym o talleres poco a poco.",
+  doodleCafeTitle: "Cafecito sin prisa:",
+  doodleCafeTxt: "pláticas reales, risas y buena vibra entre amigas.",
+  doodleGymTitle: "Gym y movimiento:",
+  doodleGymTxt: "clases, entrenos y energía en grupo para activarnos juntas.",
+  nombrePh: "Ej. María",
+  contactoPh: "Ej. @tuinstagram o +1 514...",
+  interesPh: "Ej. Cafecito, gym, clases, talleres...",
+  btn: "Quiero unirme",
+  note: "Recibiré tus datos y te escribo pronto para sumarte."
+};
+
+function setTextById(id, val){
+  var el = document.getElementById(id);
+  if(el) el.textContent = val;
+}
+
+function applyLang(lang){
+  LANG = (lang === "fr" || lang === "en") ? lang : "es";
+  var pack = LANG === "es" ? ES_DEFAULTS : I18N[LANG];
+
+  document.documentElement.lang = LANG;
+  document.title = pack.title;
+
+  var scriptEl = document.querySelector(".script");
+  if(scriptEl) scriptEl.textContent = pack.script;
+
+  var leadEl = document.querySelector(".lead");
+  if(leadEl) leadEl.textContent = pack.lead;
+
+  var ctaEl = document.querySelector(".cta .btn");
+  if(ctaEl) ctaEl.textContent = pack.cta;
+
+  setTextById("lblMtl", pack.lblMtl);
+  setTextById("lblMex", pack.lblMex);
+  setTextById("chibiTitle", pack.chibiTitle);
+  setTextById("chibiTxt", pack.chibiTxt);
+  setTextById("doodleCafeTitle", pack.doodleCafeTitle);
+  setTextById("doodleCafeTxt", pack.doodleCafeTxt);
+  setTextById("doodleGymTitle", pack.doodleGymTitle);
+  setTextById("doodleGymTxt", pack.doodleGymTxt);
+  setTextById("joinBtn", pack.btn);
+  setTextById("formStatus", pack.note);
+
+  var nInput = document.getElementById("nombre");
+  var cInput = document.getElementById("contacto");
+  var iInput = document.getElementById("interes");
+  if(nInput) nInput.placeholder = pack.nombrePh;
+  if(cInput) cInput.placeholder = pack.contactoPh;
+  if(iInput) iInput.placeholder = pack.interesPh;
+
+  var buttons = document.querySelectorAll(".lang button");
+  for(var i = 0; i < buttons.length; i++){
+    var bLang = buttons[i].getAttribute("data-lang");
+    buttons[i].setAttribute("aria-pressed", bLang === LANG ? "true" : "false");
+  }
+
+  try{ localStorage.setItem("bl_lang", LANG); }catch(e){}
+  updateClocks();
+}
+
+(function(){
+  var buttons = document.querySelectorAll(".lang button");
+  for(var i = 0; i < buttons.length; i++){
+    buttons[i].addEventListener("click", function(){
+      applyLang(this.getAttribute("data-lang"));
+    });
+  }
+
+  var saved = null;
+  try{ saved = localStorage.getItem("bl_lang"); }catch(e){}
+  var navLang = (navigator.language || "es").toLowerCase();
+  var initial = saved || (navLang.indexOf("fr") === 0 ? "fr" : (navLang.indexOf("en") === 0 ? "en" : "es"));
+  applyLang(initial);
+  setInterval(updateClocks, 30000);
+})();
 
 /* envío a Formspree */
-(function() {
+(function(){
   var joinForm = document.getElementById("joinForm");
   var status = document.getElementById("formStatus");
   var btn = document.getElementById("joinBtn");
 
-  if (joinForm) {
-    joinForm.addEventListener("submit", function(e) {
+  if(joinForm && btn){
+    joinForm.addEventListener("submit", function(e){
       e.preventDefault();
       btn.disabled = true;
-      btn.textContent = LANG === "fr" ? "Envoi..." : "Enviando...";
+      btn.textContent = LANG === "fr" ? "Envoi..." : (LANG === "en" ? "Sending..." : "Enviando...");
 
       fetch(joinForm.action, {
         method: "POST",
         body: new FormData(joinForm),
         headers: { "Accept": "application/json" }
-      }).then(function(response) {
-        if (response.ok) {
+      }).then(function(response){
+        if(response.ok){
           joinForm.reset();
-          status.textContent = LANG === "fr"
-            ? "C’est fait ! J’ai bien reçu tes infos. Je t’écris bientôt par Instagram ou WhatsApp."
-            : "¡Listo! Ya recibí tus datos. Te escribo pronto por Instagram o WhatsApp.";
-          status.style.fontWeight = "600";
-        } else {
+          if(status){
+            status.textContent = LANG === "fr"
+              ? "C’est fait ! J’ai bien reçu tes infos. Je t’écris bientôt par Instagram ou WhatsApp."
+              : (LANG === "en"
+                ? "Done! I got your info. I’ll message you soon via Instagram or WhatsApp."
+                : "¡Listo! Ya recibí tus datos. Te escribo pronto por Instagram o WhatsApp.");
+            status.style.fontWeight = "600";
+          }
+        } else if(status){
           status.textContent = LANG === "fr"
             ? "Il y a eu un souci lors de l’envoi. Réessaie dans quelques secondes."
-            : "Hubo un problema al enviar. Intenta de nuevo en unos segundos.";
+            : (LANG === "en"
+              ? "Something went wrong while sending. Please try again in a few seconds."
+              : "Hubo un problema al enviar. Intenta de nuevo en unos segundos.");
         }
-      }).catch(function() {
-        status.textContent = LANG === "fr"
-          ? "Erreur de connexion. Vérifie ton internet et réessaie."
-          : "Error de conexión. Revisa tu internet e intenta de nuevo.";
-      }).finally(function() {
+      }).catch(function(){
+        if(status){
+          status.textContent = LANG === "fr"
+            ? "Erreur de connexion. Vérifie ton internet et réessaie."
+            : (LANG === "en"
+              ? "Connection error. Check your internet and try again."
+              : "Error de conexión. Revisa tu internet e intenta de nuevo.");
+        }
+      }).finally(function(){
         btn.disabled = false;
-        btn.textContent = LANG === "fr" ? "Je veux me joindre" : "Quiero unirme";
+        btn.textContent = LANG === "fr" ? "Je veux me joindre" : (LANG === "en" ? "I want to join" : "Quiero unirme");
       });
     });
   }
