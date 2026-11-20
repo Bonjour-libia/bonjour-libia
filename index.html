@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bonjour Libia · Tu comadre en Canadá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;700&family=Allura&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F4FF; --surface:#FFFFFF; --ink:#1B1238; --muted:#5E5482; --line:#DDD3F5;
+  --violet:#4B21B5; --blue:#2D5BEA; --lav:#E8E0FF; --sun:#FFCB5C;
+  --hero:#2A1070; --hero-ink:#FFFFFF; --btn:#4B21B5; --btn-ink:#FFFFFF; --link:#3A1FA8;
+  box-sizing:border-box; color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#120B26;--surface:#1C1238;--ink:#F2EDFF;--muted:#B8ABDC;--line:#3A2A66;--violet:#B9A2FF;--blue:#7EA2FF;--lav:#2B1D52;--hero:#1B1040;--btn:#B9A2FF;--btn-ink:#1B1238;--link:#C9B8FF;color-scheme:dark;}
+}
+:root[data-theme="dark"]{--bg:#120B26;--surface:#1C1238;--ink:#F2EDFF;--muted:#B8ABDC;--line:#3A2A66;--violet:#B9A2FF;--blue:#7EA2FF;--lav:#2B1D52;--hero:#1B1040;--btn:#B9A2FF;--btn-ink:#1B1238;--link:#C9B8FF;color-scheme:dark;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;line-height:1.05;margin:0}
+a{color:var(--link)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;text-decoration:none;font:inherit;font-weight:700;padding:14px 24px;border-radius:999px;border:2px solid var(--btn);background:var(--btn);color:var(--btn-ink);cursor:pointer}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);padding:56px 0 64px}
+.hero .wrap{display:grid;gap:40px;align-items:center}
+.hero h1{font-size:clamp(52px,13vw,112px);font-weight:800;letter-spacing:-.03em}
+.script{font-family:Allura,"Brush Script MT",cursive;font-size:clamp(30px,6vw,44px);color:var(--sun);margin:10px 0 18px}
+.lead{max-width:34ch;font-size:19px;opacity:.92;margin:0 0 26px}
+.hero .btn{background:#fff;color:#2A1070;border-color:#fff}
+.hero .btn.ghost{background:transparent;color:#fff;border-color:#fff}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.clocks{display:grid;gap:14px}
+.clock{background:#fff;color:#1B1238;border-radius:26px;padding:20px 24px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.clock:nth-child(2){background:var(--blue);color:#fff;margin-left:28px}
+.clock span{font-weight:700}
+.clock b{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(34px,8vw,48px);font-weight:800;letter-spacing:-.02em}
+.gap{margin:6px 0 0;font-size:15px;opacity:.9}
+
+.hero{position:relative}
+.lang{position:absolute;top:14px;right:18px;display:flex;gap:6px;z-index:2}
+.lang button{font:inherit;font-size:14px;font-weight:700;padding:6px 14px;border-radius:99px;border:2px solid #fff;background:transparent;color:#fff;cursor:pointer}
+.lang button[aria-pressed="true"]{background:#fff;color:#2A1070}
+.lang button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+/* secciones */
+section{padding:64px 0}
+h2{font-size:clamp(32px,7vw,52px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.intro{color:var(--muted);max-width:52ch;margin:0 0 28px}
+.about p{max-width:60ch;font-size:19px;margin:0 0 14px}
+.rows{border-top:2px solid var(--ink)}
+.row{display:grid;gap:6px;padding:22px 0;border-bottom:1px solid var(--line)}
+.row h3{font-size:26px;font-weight:800;color:var(--violet)}
+.row p{margin:0;color:var(--muted);max-width:52ch}
+.plans{display:grid;gap:14px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px}
+.plan:nth-child(1){border-left:8px solid var(--violet)}
+.plan:nth-child(2){border-left:8px solid var(--blue)}
+.plan:nth-child(3){border-left:8px solid var(--sun)}
+.plan h3{font-size:24px;font-weight:800;margin-bottom:6px}
+.plan p{margin:0;color:var(--muted)}
+.state{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;background:var(--lav);color:var(--link);padding:4px 12px;border-radius:99px}
+
+/* unete */
+.join{background:var(--lav)}
+.join .wrap{display:grid;gap:30px}
+form{background:var(--surface);border-radius:26px;padding:24px;border:1px solid var(--line)}
+label{display:block;font-weight:700;font-size:15px;margin:14px 0 6px}
+label:first-of-type{margin-top:0}
+input,select{width:100%;font:inherit;font-size:16px;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink)}
+form .btn{width:100%;margin-top:20px;text-align:center}
+.note{font-size:14px;color:var(--muted);margin:10px 0 0}
+.safe{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.safe li{padding-left:30px;position:relative}
+.safe li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:14px;border-radius:50%;background:var(--blue)}
+footer{padding:36px 0 48px;text-align:center;color:var(--muted);font-size:15px}
+footer a{font-weight:700}
+
+@media (min-width:820px){
+  .hero .wrap{grid-template-columns:1.15fr .85fr}
+  .row{grid-template-columns:.8fr 1.2fr;gap:30px;align-items:baseline}
+  .plans{grid-template-columns:repeat(3,1fr)}
+  .join .wrap{grid-template-columns:1fr 1fr;align-items:start}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="lang" role="group" aria-label="Idioma / Langue"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="fr" aria-pressed="false">FR</button></div>
+  <div class="wrap">
+    <div>
+      <h1>Bonjour Libia</h1>
+      <div class="script">Descubre. Vive. Conecta.</div>
+      <p class="lead">Tu comadre en Canadá. Conozco gente, lugares y planes en Québec, y te invito a platicar con calma.</p>
+      <div class="cta">
+        <a class="btn" href="#unete">Únete a Bonjour Club</a>
+        <a class="btn ghost" id="groupTop" href="#" target="_blank" rel="noopener">Grupo de WhatsApp</a>
+      </div>
+    </div>
+    <div class="clocks" aria-label="Hora actual en Montréal y en Ciudad de México">
+      <div class="clock"><span>Montréal</span><b id="tMtl">--:--</b></div>
+      <div class="clock"><span>Ciudad de México</span><b id="tMex">--:--</b></div>
+      <p class="gap" id="gapTxt">Solo una hora de diferencia. Y se siente a un mundo.</p>
+    </div>
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap">
+    <h2>Una mesa para conocernos</h2>
+    <p>Soy Libia. Vengo de México, vivo en Québec y trabajo de 9 a 5, como mucha gente aquí.</p>
+    <p>Aprendí que vivir lejos de casa se siente en lo de todos los días: el café de media tarde, la plática de un martes. Por eso armo este espacio: para conocer gente de distintos países e idiomas, descubrir lugares y juntarnos.</p>
+    <p>Aquí no tienes que ser perfecto. Solo ven a platicar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Qué encuentras aquí</h2>
+    <p class="intro">Cuatro cosas que hago en mi cuenta y en la comunidad.</p>
+    <div class="rows">
+      <div class="row"><h3>Bonjour Libia conoce a…</h3><p>Entrevistas cortas a personas con historia: coaches, estilistas, ingenieros, dueños de negocios. Terminan con lo que aprendí.</p></div>
+      <div class="row"><h3>Bonjour Libia va a…</h3><p>Cafés, rincones y planes de fin de semana en la Rive-Sud y Montréal, con datos útiles de qué pedir y cuánto cuesta.</p></div>
+      <div class="row"><h3>Bonjour Libia aprendió…</h3><p>Pláticas de diez segundos sobre vivir entre dos países, desde el carro o desde mi casa.</p></div>
+      <div class="row"><h3>Bonjour Club</h3><p>La comunidad: gente que se une para café, baile, caminatas, talleres y cenas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Planes que estamos armando</h2>
+    <p class="intro">Las fechas se confirman cuando se junte el grupo. Apúntate y te aviso primero.</p>
+    <div class="plans">
+      <div class="plan"><h3>Café para conocernos</h3><p>Un primer encuentro en un lugar público, con un grupo pequeño.</p><span class="state">Fecha por confirmar</span></div>
+      <div class="plan"><h3>Muévete</h3><p>Una clase o actividad para mover el cuerpo juntos: salsa, zumba, caminata o lo que la comunidad pida.</p><span class="state">Por definir</span></div>
+      <div class="plan"><h3>Talleres</h3><p>Aprender algo nuevo con personas de la comunidad: pintura, inteligencia artificial y más.</p><span class="state">Por definir</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="unete">
+  <div class="wrap">
+    <div>
+      <h2>Únete a Bonjour Club</h2>
+      <p class="intro">Es gratis. Cuéntame quién eres y te escribo cuando haya un plan en tu zona.</p>
+      <ul class="safe">
+        <li>Los encuentros son en lugares públicos y en grupo.</li>
+        <li>La dirección exacta se comparte solo con quienes se inscriben.</li>
+        <li>Tus datos solo se usan para invitarte a los planes.</li>
+      </ul>
+      <p style="margin-top:22px"><a class="btn ghost" id="groupBtn" href="#" target="_blank" rel="noopener" style="color:var(--ink)">Entrar al grupo de WhatsApp</a></p>
+    </div>
+    <form id="joinForm" autocomplete="on">
+      <label for="nombre">Tu nombre</label>
+      <input id="nombre" type="text" required placeholder="Ej. María">
+      <label for="zona">¿Dónde vives?</label>
+      <select id="zona" required>
+        <option value="">Elige una opción</option>
+        <option>Rive-Sud</option><option>Montréal</option><option>Québec</option><option>Otra zona</option>
+      </select>
+      <label for="plan">¿A qué plan te apuntas?</label>
+      <select id="plan" required>
+        <option value="">Elige una opción</option>
+        <option>Café para conocernos</option><option>Muévete (baile o ejercicio)</option><option>Caminata</option><option>Talleres (pintura, IA y más)</option><option>Cena</option><option>Lo que se arme</option>
+      </select>
+      <button class="btn" type="submit" id="joinBtn">Quiero unirme</button>
+      <p class="note">Se abrirá WhatsApp con tu mensaje listo para enviarme.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a id="igLink" href="#" target="_blank" rel="noopener">Instagram</a> · By Libia 💌</p>
+    <p>Descubre. Vive. Conecta.</p>
+  </div>
+</footer>
+
+<script>
+/* Libia: pega aquí tus enlaces. Lo que dejes vacío se desactiva solo. */
+var CONFIG = {
+  WHATSAPP_NUMERO: "525520337764",
+  WHATSAPP_GRUPO: "",   /* https://chat.whatsapp.com/... */
+  INSTAGRAM: "https://www.instagram.com/bonjourlibia"
+};
+
+function wire(id, url){
+  var el = document.getElementById(id);
+  if(!el) return;
+  if(url){ el.href = url; } else { el.setAttribute("aria-disabled","true"); el.removeAttribute("href"); }
+}
+wire("groupTop", CONFIG.WHATSAPP_GRUPO);
+wire("groupBtn", CONFIG.WHATSAPP_GRUPO);
+wire("igLink", CONFIG.INSTAGRAM);
+
+/* idioma ES / FR */
+var LANG = "es";
+var FR = {
+"Descubre. Vive. Conecta.":"Découvre. Vis. Connecte.",
+"Tu comadre en Canadá. Conozco gente, lugares y planes en Québec, y te invito a platicar con calma.":"Ta comadre au Canada, comme on dit au Mexique pour une amie proche. Je rencontre des gens, je découvre des lieux et des plans au Québec, et je t’invite à jaser sans se presser.",
+"Únete a Bonjour Club":"Rejoins Bonjour Club",
+"Grupo de WhatsApp":"Groupe WhatsApp",
+"Ciudad de México":"Mexico",
+"Una mesa para conocernos":"Une table pour faire connaissance",
+"Soy Libia. Vengo de México, vivo en Québec y trabajo de 9 a 5, como mucha gente aquí.":"Moi, c’est Libia. Je viens du Mexique, je vis au Québec et je travaille de 9 à 5, comme beaucoup de gens ici.",
+"Aprendí que vivir lejos de casa se siente en lo de todos los días: el café de media tarde, la plática de un martes. Por eso armo este espacio: para conocer gente de distintos países e idiomas, descubrir lugares y juntarnos.":"J’ai appris que vivre loin de chez soi se sent dans le quotidien : le café de l’après-midi, la jasette d’un mardi. C’est pour ça que je crée cet espace : pour rencontrer des gens de pays et de langues différents, découvrir des lieux et se réunir.",
+"Aquí no tienes que ser perfecto. Solo ven a platicar.":"Ici, pas besoin d’être parfait. Viens simplement jaser.",
+"Qué encuentras aquí":"Ce que tu trouves ici",
+"Cuatro cosas que hago en mi cuenta y en la comunidad.":"Quatre choses que je fais sur mon compte et dans la communauté.",
+"Bonjour Libia conoce a…":"Bonjour Libia rencontre…",
+"Bonjour Libia va a…":"Bonjour Libia va à…",
+"Bonjour Libia aprendió…":"Bonjour Libia a appris…",
+"Entrevistas cortas a personas con historia: coaches, estilistas, ingenieros, dueños de negocios. Terminan con lo que aprendí.":"De courtes entrevues avec des gens inspirants : coachs, coiffeuses, ingénieurs, propriétaires d’entreprise. Elles se terminent par ce que j’ai appris.",
+"Cafés, rincones y planes de fin de semana en la Rive-Sud y Montréal, con datos útiles de qué pedir y cuánto cuesta.":"Cafés, petits coins et plans de fin de semaine sur la Rive-Sud et à Montréal, avec des infos utiles : quoi commander et combien ça coûte.",
+"Pláticas de diez segundos sobre vivir entre dos países, desde el carro o desde mi casa.":"De courtes jasettes de dix secondes sur la vie entre deux pays, depuis ma voiture ou ma maison.",
+"La comunidad: gente que se une para café, baile, caminatas, talleres y cenas.":"La communauté : des gens qui se réunissent pour un café, de la danse, des marches, des ateliers et des soupers.",
+"Planes que estamos armando":"Les plans qu’on prépare",
+"Las fechas se confirman cuando se junte el grupo. Apúntate y te aviso primero.":"Les dates seront confirmées quand le groupe sera formé. Inscris-toi et je te préviens en premier.",
+"Café para conocernos":"Café pour faire connaissance",
+"Un primer encuentro en un lugar público, con un grupo pequeño.":"Une première rencontre dans un lieu public, en petit groupe.",
+"Fecha por confirmar":"Date à confirmer",
+"Muévete":"Bouge-toi",
+"Muévete (baile o ejercicio)":"Bouge-toi (danse ou exercice)",
+"Una clase o actividad para mover el cuerpo juntos: salsa, zumba, caminata o lo que la comunidad pida.":"Un cours ou une activité pour bouger ensemble : salsa, zumba, marche ou ce que la communauté demandera.",
+"Por definir":"À définir",
+"Talleres":"Ateliers",
+"Talleres (pintura, IA y más)":"Ateliers (peinture, IA et plus)",
+"Aprender algo nuevo con personas de la comunidad: pintura, inteligencia artificial y más.":"Apprendre quelque chose de nouveau avec des gens de la communauté : peinture, intelligence artificielle et plus.",
+
+"Es gratis. Cuéntame quién eres y te escribo cuando haya un plan en tu zona.":"C’est gratuit. Dis-moi qui tu es et je t’écris quand il y aura un plan dans ta région.",
+"Los encuentros son en lugares públicos y en grupo.":"Les rencontres ont lieu dans des lieux publics et en groupe.",
+"La dirección exacta se comparte solo con quienes se inscriben.":"L’adresse exacte est partagée seulement avec les personnes inscrites.",
+"Tus datos solo se usan para invitarte a los planes.":"Tes données servent seulement à t’inviter aux plans.",
+"Entrar al grupo de WhatsApp":"Entrer dans le groupe WhatsApp",
+"Tu nombre":"Ton prénom",
+"¿Dónde vives?":"Où habites-tu ?",
+"¿A qué plan te apuntas?":"À quel plan t’inscris-tu ?",
+"Elige una opción":"Choisis une option",
+"Otra zona":"Autre région",
+"Caminata":"Marche",
+"Cena":"Souper",
+"Lo que se arme":"Ce qui se prépare",
+"Quiero unirme":"Je veux me joindre",
+"Se abrirá WhatsApp con tu mensaje listo para enviarme.":"WhatsApp s’ouvrira avec ton message prêt à m’être envoyé."
+};
+var orig = new Map();
+document.querySelectorAll("option").forEach(function(o){ o.value = o.value; });
+function setLang(l){
+  LANG = l;
+  var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), list = [], n;
+  while((n = w.nextNode())) list.push(n);
+  list.forEach(function(t){
+    var p = t.parentNode;
+    if(!p || p.tagName === "SCRIPT" || p.id === "gapTxt") return;
+    if(!orig.has(t)){
+      var key = t.nodeValue.trim();
+      if(!key || !FR.hasOwnProperty(key)) return;
+      orig.set(t, t.nodeValue);
+    }
+    var src = orig.get(t), k = src.trim();
+    t.nodeValue = l === "fr" ? src.replace(k, FR[k]) : src;
+  });
+  document.getElementById("nombre").placeholder = l === "fr" ? "Ex. Marie" : "Ej. María";
+  document.documentElement.lang = l;
+  document.title = l === "fr" ? "Bonjour Libia · Ta comadre au Canada" : "Bonjour Libia · Tu comadre en Canadá";
+  document.querySelectorAll(".lang button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l ? "true" : "false"); });
+  try{ localStorage.setItem("bl_lang", l); }catch(e){}
+  tick();
+}
+document.querySelectorAll(".lang button").forEach(function(b){
+  b.addEventListener("click", function(){ setLang(b.getAttribute("data-lang")); });
+});
+
+/* relojes en vivo */
+function parts(tz){
+  var f = new Intl.DateTimeFormat("en-US",{timeZone:tz,hour:"numeric",minute:"2-digit",hour12:true});
+  var p = f.formatToParts(new Date()), o = {};
+  p.forEach(function(x){ o[x.type] = x.value; });
+  var h24 = new Intl.DateTimeFormat("en-US",{timeZone:tz,hour:"numeric",hour12:false}).formatToParts(new Date()).filter(function(x){return x.type==="hour";})[0].value;
+  return { text: o.hour + ":" + o.minute + " " + (o.dayPeriod||"").toLowerCase(), h: parseInt(h24,10) % 24 };
+}
+function tick(){
+  try{
+    var a = parts("America/Toronto"), b = parts("America/Mexico_City");
+    document.getElementById("tMtl").textContent = a.text;
+    document.getElementById("tMex").textContent = b.text;
+    var d = (a.h - b.h + 24) % 24;
+    var t = d === 1 ? (LANG === "fr" ? "Une heure de différence seulement." : "Solo una hora de diferencia.") : (LANG === "fr" ? d + " heures de différence seulement." : "Solo " + d + " horas de diferencia.");
+    document.getElementById("gapTxt").textContent = t + (LANG === "fr" ? " Et pourtant, ça paraît si loin." : " Y se siente a un mundo.");
+  }catch(e){}
+}
+var saved = null;
+try{ saved = localStorage.getItem("bl_lang"); }catch(e){}
+var start = saved || ((navigator.language || "").toLowerCase().indexOf("fr") === 0 ? "fr" : "es");
+if(start === "fr"){ setLang("fr"); } else { tick(); }
+setInterval(tick, 30000);
+
+/* formulario a WhatsApp */
+var joinBtn = document.getElementById("joinBtn");
+if(!CONFIG.WHATSAPP_NUMERO){ joinBtn.setAttribute("aria-disabled","true"); }
+document.getElementById("joinForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(!CONFIG.WHATSAPP_NUMERO) return;
+  var n = document.getElementById("nombre").value.trim();
+  var z = document.getElementById("zona").value;
+  var p = document.getElementById("plan").value;
+  var msg = "¡Bonjour, Libia! Soy " + n + " (" + z + "). Quiero unirme a Bonjour Club y me interesa: " + p + "." + (LANG === "fr" ? " Prefiero que me escribas en francés." : "");
+  var a = document.createElement("a");
+  a.href = "https://wa.me/" + CONFIG.WHATSAPP_NUMERO + "?text=" + encodeURIComponent(msg);
+  a.target = "_blank"; a.rel = "noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+});
+</script>
+</body>
+</html>
