@@ -335,6 +335,41 @@ document.getElementById("joinForm").addEventListener("submit", function(e){
   a.target = "_blank"; a.rel = "noopener";
   document.body.appendChild(a); a.click(); a.remove();
 });
+<script>
+var CONFIG = {
+  INSTAGRAM: "https://www.instagram.com/libiaenmontreal"
+};
+
+(function() {
+  var joinForm = document.getElementById("joinForm");
+  var status = document.getElementById("formStatus");
+  var btn = document.getElementById("joinBtn");
+
+  if (joinForm) {
+    joinForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      fetch(joinForm.action, {
+        method: "POST",
+        body: new FormData(joinForm),
+        headers: { "Accept": "application/json" }
+      }).then(function(response) {
+        if (response.ok) {
+          joinForm.reset();
+          status.textContent = "¡Listo! Ya recibí tus datos. Te escribo pronto por Instagram o WhatsApp.";
+          status.style.fontWeight = "600";
+        } else {
+          status.textContent = "Hubo un problema al enviar. Intenta de nuevo en unos segundos.";
+        }
+      }).catch(function() {
+        status.textContent = "Error de conexión. Revisa tu internet e intenta de nuevo.";
+      }).finally(function() {
+        btn.disabled = false;
+        btn.textContent = "Quiero unirme";
+      });
+    });
+  }
+})();
 </script>
-</body>
-</html>
