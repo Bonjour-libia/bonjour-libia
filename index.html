@@ -365,3 +365,35 @@ setInterval(tick, 30000);
     joinForm.addEventListener("submit", function(e) {
       e.preventDefault();
       btn.disabled = true;
+      btn.textContent = LANG === "fr" ? "Envoi..." : "Enviando...";
+
+      fetch(joinForm.action, {
+        method: "POST",
+        body: new FormData(joinForm),
+        headers: { "Accept": "application/json" }
+      }).then(function(response) {
+        if (response.ok) {
+          joinForm.reset();
+          status.textContent = LANG === "fr"
+            ? "C’est fait ! J’ai bien reçu tes infos. Je t’écris bientôt par Instagram ou WhatsApp."
+            : "¡Listo! Ya recibí tus datos. Te escribo pronto por Instagram o WhatsApp.";
+          status.style.fontWeight = "600";
+        } else {
+          status.textContent = LANG === "fr"
+            ? "Il y a eu un souci lors de l’envoi. Réessaie dans quelques secondes."
+            : "Hubo un problema al enviar. Intenta de nuevo en unos segundos.";
+        }
+      }).catch(function() {
+        status.textContent = LANG === "fr"
+          ? "Erreur de connexion. Vérifie ton internet et réessaie."
+          : "Error de conexión. Revisa tu internet e intenta de nuevo.";
+      }).finally(function() {
+        btn.disabled = false;
+        btn.textContent = LANG === "fr" ? "Je veux me joindre" : "Quiero unirme";
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
